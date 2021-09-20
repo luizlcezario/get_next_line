@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/20 19:15:32 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/20 19:32:24 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static char	*concat_all(int end, char **buffer_lists, char *buffer)
 		tmp = ft_strdup(buffer + end);
 	buffer[end] = 0;
 	res = ft_strjoin(*buffer_lists, buffer);
-	free_ptr(buffer_lists);
+	free_ptr(*buffer_lists);
 	*buffer_lists = tmp;
 	return(res);
 }
