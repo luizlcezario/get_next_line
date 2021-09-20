@@ -6,7 +6,7 @@
 #    By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/27 13:53:47 by llima-ce          #+#    #+#              #
-#    Updated: 2021/09/20 19:36:51 by llima-ce         ###   ########.fr        #
+#    Updated: 2021/09/20 19:38:33 by llima-ce         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,11 @@ fclean: clean
 	rm -f ${NAME}
 
 re: fclean all
+
+git:
+	git add .
+	git commit -m changes
+	git push
 
 rebonus: fclean bonus
 
