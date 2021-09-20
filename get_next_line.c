@@ -6,130 +6,88 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/15 13:30:45 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/20 13:13:14 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*concat_all(size_t end,int len,t_list **first_list);
-size_t	read_text(int fd, t_list **first_list);
+static char	*concat_all(int end, char **buffer_lists, char *buffer);
+static char	*read_text(char **buffer_lists, char *buffer, int fd);
 
-char	*leading_old_buffer(size_t end,int len);
-
+static void	free_ptr(char **ptr)
+{
+	free(*ptr);
+	*ptr = NULL;
+}
+//04\n1231 BUFFER_SIZE = 5 buffer_lists=01234\n
+//
 char	*get_next_line(int fd)
 {
-	t_list	*tmp;
-	t_list	**first_list;
-	char	*resf;
-	int		len_list;
-	size_t	i;
+	static char		*buffer_lists[MAX_FD + 1];
+	char			*buffer;
+	char			*resf;
 
-	first_list = (t_list **)ft_calloc(2 ,sizeof(t_list *));
-	if(!first_list)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FD)
 		return (NULL);
-	if(g_save_buffer)
-		first_list[0] = ft_lstnew(g_save_buffer);
-	i = read_text(fd, first_list);
-	if(!i)
+	buffer = (char *)malloc(sizeof(char) * BUFFER_SIZE + 1);
+	if(buffer == NULL)
 		return(NULL);
-	tmp = first_list[0];
-	len_list = 0;
-	while(tmp != NULL)
-	{
-		tmp = tmp->next;
-		len_list++;
-	}
-	resf = concat_all(i, len_list, first_list);
+	if(!buffer_lists[fd])
+		buffer_lists[fd] = ft_strdup("");
+	resf = read_text(&buffer_lists[fd], buffer, fd);
+	free_ptr(&buffer);
 	return(resf);
 }
 
-size_t	read_text(int fd, t_list **first_list)
+static char	*read_text(char **buffer_lists,char *buffer, int fd)
 {
-	char	*content;
-	t_list	*new_read;
-	size_t	end;
+	ssize_t	bytes_read;
+	int		end;
+	char	*tmp;
 
-	
-	content = ft_calloc(BUFFER_SIZE + 1,sizeof(char *));
-	if(content == NULL)
-		return(0);
-	if(first_list[0] != NULL)
+	end = BUFFER_SIZE;
+	bytes_read = read(fd, buffer, BUFFER_SIZE);
+	if(bytes_read <= 0)
 	{
-		if(ft_strchr(first_list[0]->content, '\n') != NULL)
-		{
-			end = ft_strchr(first_list[0]->content, '\n') - (char *)
-					first_list[0]->content + 1;
-			return(end);
-		}
+		return(concat_all(bytes_read, &buffer_lists[0], buffer));
 	}
-	read(fd, content, BUFFER_SIZE);
-	new_read = ft_lstnew(content);
-	ft_lstadd_back(first_list, new_read);
-	if(ft_strchr(new_read->content, '\n') != NULL)
+	tmp = ft_strchr(buffer, '\n');
+	if (tmp != NULL || bytes_read < BUFFER_SIZE)
 	{
-		end = ft_strchr(new_read->content, '\n') - content + 1;
-		return(end);
+		end = tmp - buffer + 1;
+		if(!end)
+			end = ft_strchr(buffer, '\0') - buffer + 1;
+		return(concat_all(end, &buffer_lists[0], buffer));
 	}
-	return (read_text(fd, first_list));
+	tmp = ft_strjoin(buffer_lists[0], buffer);
+	free_ptr(&buffer_lists[0]);
+	buffer_lists[0] = tmp;
+	return (read_text(&buffer_lists[0], buffer, fd));
 }
 
-
-char	*concat_all(size_t end,int len, t_list **first_list)
+static char	*concat_all(int end, char **buffer_lists, char *buffer)
 {
-
-	int	count;
-	int sizeall;
-	t_list	*tmp_list;
 	char	*tmp;
 	char	*res;
 
-	res = leading_old_buffer(end, len);
-	if(res == NULL)
-		return(NULL);
-	sizeall = 0;
-	while(len > 0)
+	tmp = NULL;
+	res = NULL;
+	if(end <= 0)
 	{
-		count = 0;
-		tmp_list = first_list[0];
-		tmp = (char *)tmp_list->content;
-		if(len != 1)
-		{
-			while(tmp[count] != 0)
-			{
-				res[sizeall] = tmp[count];
-				sizeall++;
-				count++;
-			}
-			first_list[0] = first_list[0]->next;
-			free(tmp_list);
-		}
-		else
-		{
-			while(count < (int)end)
-			{
-				res[sizeall] = tmp[count];
-				count++;
-				sizeall++;
-			}
-			if(count + 1 < sizeall)
-				g_save_buffer = ft_strchr(first_list[0]->content, '\n') + 1;
-			else
-				g_save_buffer = NULL;
-		}
-		len--;
+		if(*buffer_lists[0] == '\0')
+			return(NULL);
+		res = ft_strdup(buffer_lists[0]);
+		free_ptr(&buffer_lists[0]);
+		return(res);
 	}
-	return(res);
-}
-
-char	*leading_old_buffer(size_t end,int len)
-{
-	size_t	allSize;
-	char	*res;
-
-	allSize = ((len - 1 )* BUFFER_SIZE) + end + 1;
-	res = (char *)ft_calloc(allSize, sizeof(char));
-	if(res == NULL)
-		return(NULL);
+	else if(end == BUFFER_SIZE)
+		tmp = ft_strdup("");
+	else
+		tmp = ft_strdup(buffer + end);
+	buffer[end] = 0;
+	res = ft_strjoin(buffer_lists[0], buffer);
+	free_ptr(&buffer_lists[0]);
+	buffer_lists[0] = tmp;
 	return(res);
 }

@@ -6,7 +6,7 @@
 #    By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/27 13:53:47 by llima-ce          #+#    #+#              #
-#    Updated: 2021/09/19 23:15:09 by llima-ce         ###   ########.fr        #
+#    Updated: 2021/09/16 16:44:22 by llima-ce         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,13 +17,9 @@ SRCS = main.c get_next_line.c get_next_line_utils.c
 CFLAGS = -D BUFFER_SIZE=1 
 
 all: $(NAME)
-
-$(NAME):
 	${CC} ${CFLAGS} -g  ${SRCS} -o get_next_line
-
-run: $(NAME)
-	valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-origins=yes --track-fds=yes ./get_next_line
-
+	
+	
 clean:
 	rm -f ${OBJS} 
 

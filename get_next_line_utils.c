@@ -5,14 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/02 17:16:50 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/15 13:35:30 by llima-ce         ###   ########.fr       */
+/*   Created: 2021/08/18 19:48:50 by llima-ce          #+#    #+#             */
+/*   Updated: 2021/09/19 19:06:59 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "get_next_line.h"
 
+size_t	ft_strlen(const char *str)
+{
+	size_t	a;
+
+	a = 0;
+	while (str[a])
+		a++;
+	return (a);
+}
 
 char	*ft_strchr(const char *str, int n)
 {
@@ -28,72 +36,41 @@ char	*ft_strchr(const char *str, int n)
 	return ((char *)(str + a));
 }
 
-
-t_list	*ft_lstnew(void *content)
+char	*ft_strdup(const char *str)
 {
-	t_list	*new;
+	size_t	i;
+	size_t	len;
+	char	*s;
 
-	new = malloc(1 * sizeof(t_list));
-	if (new == NULL)
+	len = ft_strlen(str) + 1;
+	s = (char *)malloc(sizeof(char) * len);
+	if (s == NULL)
 		return (NULL);
-	new->content = content;
-	new->next = (NULL);
-	return (new);
-}
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*tmp;
-
-	if (new == NULL)
-		return ;
-	if (*lst == NULL)
-		*lst = new;
-	else
-	{
-		tmp = lst[0];
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
+	i = -1;
+	while (++i < len)
+		s[i] = str[i];
+	return (s);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	str_len_s1;
-	size_t	str_len_s2;
-	char	*res;
+	char	*str;
+	size_t	s1_len;
+	size_t	s2_len;
+	size_t	size;
 
 	if (!s1 || !s2)
-		return (NULL); 
-	str_len_s1 = 0;
-	str_len_s2 = 0;
-	res = malloc(str_len_s2 + str_len_s1 +1 * sizeof(char));
-	if (res == NULL)
 		return (NULL);
-	res[str_len_s1 + str_len_s2] = 0; 
-	while(--str_len_s2 != 0)
-		res[str_len_s1 + str_len_s2] = s2[str_len_s2];
-	while(--str_len_s1 != 0)
-		res[str_len_s1] = s1[str_len_s1];
-	return (res);
-}
-
-void	*ft_calloc(size_t nelem, size_t size)
-{
-	void	*p;
-	size_t	a;
-
-	if(!nelem || !size)
-		return(NULL);
-	p = malloc(nelem * size);
-	if (!p)
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	str = (char *)malloc(sizeof(char) * size);
+	if (!str)
 		return (NULL);
-	a = 0;
-	while (a < nelem * size)
-	{
-		*(unsigned char *)(p + a) = 0;
-		a++;
-	}
-	return (p);
+	s1_len = -1;
+	while (s1[++s1_len])
+		str[s1_len] = s1[s1_len];
+	s2_len = -1;
+	while (s2[++s2_len])
+		str[s1_len + s2_len] = s2[s2_len];
+	str[s1_len + s2_len] = '\0';
+	return (str);
 }

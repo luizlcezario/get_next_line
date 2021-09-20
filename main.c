@@ -7,8 +7,13 @@ int main()
 	char *singleLine;
 	int i;
 
-	fpointer = open("teste.txt", 256);
-	for(i = 0; i <= 4; i++)
+	fpointer = open("files/41_no_nl", 256);
+
+	// singleLine = get_next_line(fpointer);
+	// printf("%s",singleLine);
+	// singleLine = get_next_line(-1);
+	// printf("%s",singleLine);
+	for(i = 0; i <= 0; i++)
 	{
 		singleLine = get_next_line(fpointer);
 		printf("%s",singleLine);
