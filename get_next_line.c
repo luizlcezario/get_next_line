@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/20 13:13:14 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/20 19:15:32 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static void	free_ptr(char **ptr)
 	free(*ptr);
 	*ptr = NULL;
 }
-//04\n1231 BUFFER_SIZE = 5 buffer_lists=01234\n
-//
+
 char	*get_next_line(int fd)
 {
 	static char		*buffer_lists[MAX_FD + 1];
@@ -39,7 +38,7 @@ char	*get_next_line(int fd)
 	free_ptr(&buffer);
 	return(resf);
 }
-
+ 
 static char	*read_text(char **buffer_lists,char *buffer, int fd)
 {
 	ssize_t	bytes_read;
@@ -50,7 +49,7 @@ static char	*read_text(char **buffer_lists,char *buffer, int fd)
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if(bytes_read <= 0)
 	{
-		return(concat_all(bytes_read, &buffer_lists[0], buffer));
+		return(concat_all(bytes_read, buffer_lists, buffer));
 	}
 	tmp = ft_strchr(buffer, '\n');
 	if (tmp != NULL || bytes_read < BUFFER_SIZE)
@@ -58,12 +57,12 @@ static char	*read_text(char **buffer_lists,char *buffer, int fd)
 		end = tmp - buffer + 1;
 		if(!end)
 			end = ft_strchr(buffer, '\0') - buffer + 1;
-		return(concat_all(end, &buffer_lists[0], buffer));
+		return(concat_all(end, buffer_lists, buffer));
 	}
-	tmp = ft_strjoin(buffer_lists[0], buffer);
-	free_ptr(&buffer_lists[0]);
-	buffer_lists[0] = tmp;
-	return (read_text(&buffer_lists[0], buffer, fd));
+	tmp = ft_strjoin(*buffer_lists, buffer);
+	free_ptr(buffer_lists);
+	*buffer_lists = tmp;
+	return (read_text(buffer_lists, buffer, fd));
 }
 
 static char	*concat_all(int end, char **buffer_lists, char *buffer)
@@ -75,10 +74,10 @@ static char	*concat_all(int end, char **buffer_lists, char *buffer)
 	res = NULL;
 	if(end <= 0)
 	{
-		if(*buffer_lists[0] == '\0')
+		if(**buffer_lists == '\0')
 			return(NULL);
-		res = ft_strdup(buffer_lists[0]);
-		free_ptr(&buffer_lists[0]);
+		res = ft_strdup(*buffer_lists);
+		free_ptr(buffer_lists);
 		return(res);
 	}
 	else if(end == BUFFER_SIZE)
@@ -86,8 +85,8 @@ static char	*concat_all(int end, char **buffer_lists, char *buffer)
 	else
 		tmp = ft_strdup(buffer + end);
 	buffer[end] = 0;
-	res = ft_strjoin(buffer_lists[0], buffer);
-	free_ptr(&buffer_lists[0]);
-	buffer_lists[0] = tmp;
+	res = ft_strjoin(*buffer_lists, buffer);
+	free_ptr(buffer_lists);
+	*buffer_lists = tmp;
 	return(res);
 }
