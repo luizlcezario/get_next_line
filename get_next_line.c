@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/20 21:08:24 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/20 21:35:10 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,25 @@ static char	*read_text(char **buffer_lists,char *buffer, int fd)
 {
 	ssize_t	bytes_read;
 	char	*tmp;
+	char	*res;
 
+	res = NULL;
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if(bytes_read <= 0)
 	{
 		return(concat_all(bytes_read, buffer_lists, buffer));
 	}
-	tmp = ft_strchr(buffer, '\n');
-	if (tmp != NULL || bytes_read < BUFFER_SIZE)
+	res = ft_strchr(buffer, '\n');
+	if (res != NULL || bytes_read < BUFFER_SIZE)
 	{
-		if(tmp == NULL)
-			tmp = ft_strchr(buffer, '\0');
-		return(concat_all(tmp - buffer + 1, buffer_lists, buffer));
+		if(res == NULL)
+			res = ft_strchr(buffer, '\0');
+		return(concat_all(res - buffer + 1, buffer_lists, buffer));
 	}
 	tmp = ft_strjoin(*buffer_lists, buffer);
 	free_ptr(buffer_lists);
 	*buffer_lists = tmp;
+	tmp = NULL;
 	return (read_text(buffer_lists, buffer, fd));
 }
 
