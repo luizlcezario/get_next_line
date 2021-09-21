@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/20 19:37:43 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/20 21:08:24 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,8 @@ char	*get_next_line(int fd)
 static char	*read_text(char **buffer_lists,char *buffer, int fd)
 {
 	ssize_t	bytes_read;
-	int		end;
 	char	*tmp;
 
-	end = BUFFER_SIZE;
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if(bytes_read <= 0)
 	{
@@ -54,10 +52,9 @@ static char	*read_text(char **buffer_lists,char *buffer, int fd)
 	tmp = ft_strchr(buffer, '\n');
 	if (tmp != NULL || bytes_read < BUFFER_SIZE)
 	{
-		end = tmp - buffer + 1;
-		if(!end)
-			end = ft_strchr(buffer, '\0') - buffer + 1;
-		return(concat_all(end, buffer_lists, buffer));
+		if(tmp == NULL)
+			tmp = ft_strchr(buffer, '\0');
+		return(concat_all(tmp - buffer + 1, buffer_lists, buffer));
 	}
 	tmp = ft_strjoin(*buffer_lists, buffer);
 	free_ptr(buffer_lists);
@@ -67,11 +64,11 @@ static char	*read_text(char **buffer_lists,char *buffer, int fd)
 
 static char	*concat_all(int end, char **buffer_lists, char *buffer)
 {
-	char	*tmp;
 	char	*res;
+	char	*tmp;
 
-	tmp = NULL;
 	res = NULL;
+	tmp = NULL;
 	if(end <= 0)
 	{
 		if(**buffer_lists == '\0')
@@ -80,9 +77,7 @@ static char	*concat_all(int end, char **buffer_lists, char *buffer)
 		free_ptr(buffer_lists);
 		return(res);
 	}
-	else if(end == BUFFER_SIZE)
-		tmp = ft_strdup("");
-	else
+	if(end  != BUFFER_SIZE)
 		tmp = ft_strdup(buffer + end);
 	buffer[end] = 0;
 	res = ft_strjoin(*buffer_lists, buffer);
