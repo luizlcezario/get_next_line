@@ -6,14 +6,14 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/22 16:50:58 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/22 17:18:09 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
 char	*concat_all(size_t end, int len, t_list **buffer_lists);
-char	*read_text( t_list **buffer_lists, int len, int fd);
+char	*read_text( t_list **buffer_lists, t_list *last, int len, int fd);
 char	*leading_old_buffer(size_t end,int len);
 
 char	*g_save_buffer;
@@ -27,19 +27,24 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if(g_save_buffer != NULL)
 		buffer_lists[fd] = ft_lstnew(g_save_buffer);
-	resf = read_text(&buffer_lists[fd], 0, fd);
+	resf = read_text(&buffer_lists[fd], NULL, 0, fd);
 	if(resf == NULL)
 		return(NULL);
 	return(resf);
 }
 
-char	*read_text( t_list **buffer_lists, int len, int fd)
+char	*read_text( t_list **buffer_lists, t_list *last, int len, int fd)
 {
 	char	*content;
 	ssize_t	bytes_read;
-	ssize_t	end;
+	t_list	*end;
 
-	end = BUFFER_SIZE;
+	content = ft_strchr(last->content, '\n');
+	if(content != NULL)
+	{
+		bytes_read = content - (char *)last->content + 1;
+		return(concat_all(bytes_read, len, &buffer_lists[0]));
+	}
 	content = ft_calloc((BUFFER_SIZE + 1),sizeof(char));
 	if(content == NULL)
 		return(0);
@@ -47,19 +52,13 @@ char	*read_text( t_list **buffer_lists, int len, int fd)
 	if(bytes_read <= 0)
 	{
 		free(content);
-		return(concat_all(end, len, &buffer_lists[0]));
+		return(concat_all(bytes_read, len, &buffer_lists[0]));
 	}
-	else
+	else 
 		len += bytes_read;
-	ft_lstadd_back(&buffer_lists[0], ft_lstnew(content));
-	if(ft_strchr(buffer_lists[0]->content, '\n') != NULL)
-	{
-		end = ft_strchr(content, '\n') - content + 1;
-		if(!end)
-			end = ft_strchr(content, '\0') - content + 1;
-		return(concat_all(end, len, &buffer_lists[0]));
-	}
-	return (read_text(&buffer_lists[0], len, fd));
+	end = ft_lstnew(content);
+	ft_lstadd_back(&buffer_lists[0], end);
+	return (read_text(&buffer_lists[0], end, len, fd));
 }
 
 

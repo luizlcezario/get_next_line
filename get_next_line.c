@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/22 16:55:50 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/22 17:30:11 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,9 @@ static char	*concat_all(int end, char **buffer_lists, t_bool fl)
 	}
 	tmp = ft_substr(*buffer_lists, end, BUFFER_SIZE);
 	res = *buffer_lists;
+	if(ft_strlen(*buffer_lists) > end)
+		free_ptr(*buffer_lists[end + 1]);
 	res[end] = 0;
-	free_ptr(buffer_lists);
 	*buffer_lists = tmp;
 	return(res);
 }
