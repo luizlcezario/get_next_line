@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:46 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/22 16:48:59 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/22 19:03:39 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 #  define MAX_FD 256
 # endif
 
-typedef enum {FALSE = 0, TRUE = !FALSE} t_bool;
 
 #include <unistd.h>
 #include <stdlib.h>
