@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/22 19:17:34 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/22 19:30:21 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,7 @@ static char	*concat_all(int end, char **buffer_lists, bool fl)
 	if (end <= 0 && fl == false)
 	{
 		if (**buffer_lists == '\0')
-		{
-			*buffer_lists = NULL;
 			return (NULL);
-		}
 		res = *buffer_lists;
 		*buffer_lists = NULL;
 		return (res);
