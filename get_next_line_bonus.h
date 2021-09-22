@@ -3,6 +3,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdbool.h>
 
 # ifndef MAX_FD
 #  define MAX_FD 256
@@ -11,7 +12,6 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
-
 
 // typedef enum {FALSE = 0, TRUE = !FALSE} t_bool;
 

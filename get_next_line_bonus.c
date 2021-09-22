@@ -6,19 +6,22 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/22 19:03:31 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/22 19:17:34 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
 
-static char	*concat_all(int end, char **buffer_lists, int fl);
+static char	*concat_all(int end, char **buffer_lists, bool fl);
 static char	*read_text(char **buffer_lists, char *buffer, int fd);
 
 static void	free_ptr(char **ptr)
 {
-	free(*ptr);
-	*ptr = NULL;
+	if(*ptr != NULL)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
 }
 
 char	*get_next_line(int fd)
@@ -47,10 +50,10 @@ static char	*read_text(char **buffer_lists, char *buffer, int fd)
 
 	res = ft_strchr(*buffer_lists, '\n');
 	if (res != NULL)
-		return(concat_all(res - *buffer_lists + 1, buffer_lists,1));
+		return(concat_all(res - *buffer_lists + 1, buffer_lists, true));
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if(bytes_read <= 0)
-		return(concat_all(bytes_read, buffer_lists, 0));
+		return(concat_all(bytes_read, buffer_lists, false));
 	buffer[bytes_read] = 0;
 	tmp = ft_strjoin(*buffer_lists, buffer);
 	free_ptr(buffer_lists);
@@ -58,19 +61,22 @@ static char	*read_text(char **buffer_lists, char *buffer, int fd)
 	return (read_text(buffer_lists, buffer, fd));
 }
 
-static char	*concat_all(int end, char **buffer_lists, int fl)
+static char	*concat_all(int end, char **buffer_lists, bool fl)
 {
 	char	*res;
 	char	*tmp;
 
 	tmp = NULL;
-	if(end <= 0 && fl ==  1)
+	if (end <= 0 && fl == false)
 	{
-		if(**buffer_lists == '\0')
-			return(NULL);
+		if (**buffer_lists == '\0')
+		{
+			*buffer_lists = NULL;
+			return (NULL);
+		}
 		res = *buffer_lists;
 		*buffer_lists = NULL;
-		return(res);
+		return (res);
 	}
 	tmp = ft_substr(*buffer_lists, end, BUFFER_SIZE);
 	res = *buffer_lists;

@@ -12,7 +12,7 @@ int main()
 	// printf("%s",singleLine);
 	// singleLine = get_next_line(-1);
 	// printf("%s",singleLine);
-	fpointer = open("files/43_with_nl", 256);
+	fpointer = open("files/empty", 256);
 	for(i = 0; i <= 2; i++)
 	{
 		singleLine = get_next_line(fpointer);

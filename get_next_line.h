@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:46 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/22 19:03:39 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/22 19:13:54 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,11 @@
 #  define MAX_FD 256
 # endif
 
+// typedef enum {FALSE = 0, TRUE = !FALSE} t_bool;
 
 #include <unistd.h>
+# include <stdbool.h>
 #include <stdlib.h>
-
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}				t_list;
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);
