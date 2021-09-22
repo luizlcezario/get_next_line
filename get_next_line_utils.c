@@ -6,11 +6,25 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/18 19:48:50 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/19 19:06:59 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/21 20:59:21 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_strchr(const char *str, int n)
+{
+	char *tmp;
+
+	tmp = (char *) str;
+	while (*tmp != (char)n)
+	{
+		if (*tmp == 0)
+			return (NULL);
+		tmp++;
+	}
+	return ((char *)tmp);
+}
 
 size_t	ft_strlen(const char *str)
 {
@@ -22,19 +36,6 @@ size_t	ft_strlen(const char *str)
 	return (a);
 }
 
-char	*ft_strchr(const char *str, int n)
-{
-	int	a;
-
-	a = 0;
-	while (*(str + a) != (char)n)
-	{
-		if (*(str + a) == 0)
-			return (NULL);
-		a++;
-	}
-	return ((char *)(str + a));
-}
 
 char	*ft_strdup(const char *str)
 {
@@ -55,8 +56,8 @@ char	*ft_strdup(const char *str)
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*str;
-	size_t	s1_len;
-	size_t	s2_len;
+	int	i;
+	int	j;
 	size_t	size;
 
 	if (!s1 || !s2)
@@ -65,12 +66,12 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str = (char *)malloc(sizeof(char) * size);
 	if (!str)
 		return (NULL);
-	s1_len = -1;
-	while (s1[++s1_len])
-		str[s1_len] = s1[s1_len];
-	s2_len = -1;
-	while (s2[++s2_len])
-		str[s1_len + s2_len] = s2[s2_len];
-	str[s1_len + s2_len] = '\0';
+	i = -1;
+	while (s1[++i])
+		str[i] = s1[i];
+	j = -1;
+	while (s2[++j])
+		str[i + j] = s2[j];
+	str[i + j] = '\0';
 	return (str);
 }

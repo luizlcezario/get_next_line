@@ -6,7 +6,7 @@
 #    By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/27 13:53:47 by llima-ce          #+#    #+#              #
-#    Updated: 2021/09/20 19:39:44 by llima-ce         ###   ########.fr        #
+#    Updated: 2021/09/21 20:56:53 by llima-ce         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ all:
 	${CC} ${CFLAGS} -g  ${SRCS} -o get_next_line
 
 run:
-	valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-origins=yes --track-fds=yes ./get_next_line
+	valgrind --leak-check=full --track-origins=yes ./get_next_line
 
 clean:
 	rm -f ${OBJS} 

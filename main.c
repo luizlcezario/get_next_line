@@ -18,5 +18,6 @@ int main()
 		singleLine = get_next_line(fpointer);
 		printf("%s",singleLine);
 	}
+	close(fpointer);
 	return(0);
 }
