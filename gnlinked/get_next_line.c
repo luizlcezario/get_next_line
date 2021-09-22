@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/16 20:58:41 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/22 16:50:58 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ char	*get_next_line(int fd)
 		return (NULL);
 	if(g_save_buffer != NULL)
 		buffer_lists[fd] = ft_lstnew(g_save_buffer);
-	if(buffer_lists[fd] == NULL)
-		buffer_lists[fd] = ft_lstnew("");
 	resf = read_text(&buffer_lists[fd], 0, fd);
 	if(resf == NULL)
 		return(NULL);

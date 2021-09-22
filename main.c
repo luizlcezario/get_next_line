@@ -7,16 +7,17 @@ int main()
 	char *singleLine;
 	int i;
 
-	fpointer = open("files/43_no_nl", 256);
-
 	// singleLine = get_next_line(fpointer);
 	// printf("%s",singleLine);
 	// singleLine = get_next_line(-1);
 	// printf("%s",singleLine);
-	for(i = 0; i <= 1; i++)
+	fpointer = open("files/nl", 256);
+	for(i = 0; i <= 2; i++)
 	{
 		singleLine = get_next_line(fpointer);
-		printf("%s",singleLine);
+		printf("%s\n",singleLine);
+		free(singleLine);
+		singleLine=NULL;
 	}
 	close(fpointer);
 	return(0);
