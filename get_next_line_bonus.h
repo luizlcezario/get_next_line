@@ -12,6 +12,7 @@
 #  define BUFFER_SIZE 1
 # endif
 
+
 typedef enum {FALSE = 0, TRUE = !FALSE} t_bool;
 
 size_t	ft_strlen(const char *s);
