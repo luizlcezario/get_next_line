@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/21 20:55:03 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/21 21:16:51 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static char	*read_text(char **buffer_lists,char *buffer, int fd)
 	if (res != NULL || bytes_read < BUFFER_SIZE)
 	{
 		if(res == NULL)
-			res = ft_strchr(buffer, '\0');
+			return(concat_all(bytes_read, buffer_lists, buffer));
 		return(concat_all(res - buffer + 1, buffer_lists, buffer));
 	}
 	tmp = ft_strjoin(*buffer_lists, buffer);
