@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/22 18:42:07 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/22 18:52:59 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,11 @@ static char	*read_text(char **buffer_lists, char *buffer, int fd);
 
 static void	free_ptr(char **ptr)
 {
-	free(*ptr);
-	*ptr = NULL;
+	if(*ptr != NULL)
+	{
+		free(*ptr);
+		*ptr = NULL;
+	}
 }
 
 char	*get_next_line(int fd)
