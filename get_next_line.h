@@ -6,26 +6,29 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:46 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/22 19:13:54 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/22 21:00:09 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 1
-#endif
+# include <unistd.h>
+# include <stdlib.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 # ifndef MAX_FD
 #  define MAX_FD 256
 # endif
 
-// typedef enum {FALSE = 0, TRUE = !FALSE} t_bool;
-
-#include <unistd.h>
-# include <stdbool.h>
-#include <stdlib.h>
+typedef enum e_bool
+{
+	FALSE = 0,
+	TRUE = 1
+}			t_bool;
 
 char	*get_next_line(int fd);
 char	*ft_strjoin(char const *s1, char const *s2);

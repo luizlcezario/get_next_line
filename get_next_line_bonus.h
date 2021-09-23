@@ -3,7 +3,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdbool.h>
 
 # ifndef MAX_FD
 #  define MAX_FD 256
@@ -12,6 +11,12 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1
 # endif
+
+typedef enum e_bool
+{
+	false = 0,
+	true = 1
+}			t_bool;
 
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *s, int c);
