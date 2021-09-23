@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/23 16:47:10 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/23 16:50:06 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	free_ptr(void **ptr)
 		*ptr = NULL;
 	}
 }
-
 
 char	*get_next_line(int fd)
 {
@@ -74,8 +73,10 @@ char	*concat_all(size_t end, int len, t_list **buffer_lists)
 	int		str_len;
 	char	*res;
 
-	if (len == 0)
+	res = NULL;
+	if (len <= 0)
 	{
+		free_ptr((void **)&buffer_lists[0]->content);
 		free_ptr((void **)buffer_lists);
 		return (NULL);
 	}
