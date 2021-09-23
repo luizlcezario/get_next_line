@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line_bonus.h"
+#include "get_next_line.h"
 
 static char	*concat_all(int end, char **buffer_lists, t_bool fl);
 static char	*read_text(char **buffer_lists, char *buffer, int fd);
