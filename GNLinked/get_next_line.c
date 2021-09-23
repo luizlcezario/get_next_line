@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/23 02:46:19 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/23 16:35:58 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,11 @@ char	*concat_all(size_t end, int len, t_list **buffer_lists)
 	char	*res;
 
 	if (len == 0)
+	{
+		free(buffer_lists[0]);
+		buffer_lists[0] = NULL;
 		return (NULL);
+	}
 	str_len = len - end;
 	res = (char *)malloc(str_len + 1 * sizeof(char));
 	if (res == NULL)
