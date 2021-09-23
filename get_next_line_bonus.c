@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/22 21:01:18 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/22 21:11:45 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ static char	*read_text(char **buffer_lists, char *buffer, int fd)
 
 	res = ft_strchr(*buffer_lists, '\n');
 	if (res != NULL)
-		return (concat_all(res - *buffer_lists + 1, buffer_lists, true));
+		return (concat_all(res - *buffer_lists + 1, buffer_lists, TRUE));
 	bytes_read = read(fd, buffer, BUFFER_SIZE);
 	if (bytes_read <= 0)
-		return (concat_all(bytes_read, buffer_lists, false));
+		return (concat_all(bytes_read, buffer_lists, FALSE));
 	buffer[bytes_read] = 0;
 	tmp = ft_strjoin(*buffer_lists, buffer);
 	free_ptr(buffer_lists);
@@ -67,7 +67,7 @@ static char	*concat_all(int end, char **buffer_lists, t_bool fl)
 	char	*tmp;
 
 	tmp = NULL;
-	if (end <= 0 && fl == false)
+	if (end <= 0 && fl == FALSE)
 	{
 		if (**buffer_lists == '\0')
 		{

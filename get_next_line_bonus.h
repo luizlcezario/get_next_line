@@ -14,8 +14,8 @@
 
 typedef enum e_bool
 {
-	false = 0,
-	true = 1
+	FALSE = 0,
+	TRUE = !FALSE,
 }			t_bool;
 
 size_t	ft_strlen(const char *s);
