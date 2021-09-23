@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:46 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/22 21:00:09 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/22 21:06:27 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 typedef enum e_bool
 {
-	FALSE = 0,
-	TRUE = 1
+	false = 0,
+	true = 1
 }			t_bool;
 
 char	*get_next_line(int fd);
