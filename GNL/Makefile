@@ -19,5 +19,10 @@ CFLAGS = -D BUFFER_SIZE=1
 
 all: $(NAME)
 	${CC} ${CFLAGS} -g  ${SRCS} -o get_next_line
-	
-.PHONY: all 
+
+git: 
+	git add .
+	git commit -m "auto git"
+	git push 
+
+.PHONY: all git
