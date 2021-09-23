@@ -6,13 +6,11 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:50 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/21 20:41:01 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/23 02:35:54 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "get_next_line.h"
-
 
 char	*ft_strchr(const char *str, int n)
 {
@@ -27,7 +25,6 @@ char	*ft_strchr(const char *str, int n)
 	}
 	return ((char *)(str + a));
 }
-
 
 t_list	*ft_lstnew(void *content)
 {
@@ -58,51 +55,28 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	}
 }
 
-int	ft_lstsize(t_list *lst)
+size_t	ft_strlen(const char *str)
 {
-	t_list	*tmp;
-	int		len;
-
-	tmp = lst;
-	len = 0;
-	while (tmp != NULL)
-	{
-		len++;
-		tmp = tmp->next;
-	}
-	return (len);
-}
-
-
-void	*ft_calloc(size_t nelem, size_t size)
-{
-	void	*p;
 	size_t	a;
 
-	if(!nelem || !size)
-		return(NULL);
-	p = malloc(nelem * size);
-	if (!p)
-		return (NULL);
 	a = 0;
-	while (a < nelem * size)
-	{
-		*(unsigned char *)(p + a) = 0;
+	while (str[a])
 		a++;
-	}
-	return (p);
+	return (a);
 }
 
-
-void	ft_lstclear(t_list **list)
+char	*ft_strdup(const char *str)
 {
-	t_list	*temp;
+	size_t	i;
+	size_t	len;
+	char	*s;
 
-	temp = list[0];
-	while(temp != NULL)
-	{
-		temp = list[0]->next;
-		free(list[0]);
-		list[0] = temp;
-	}
+	len = ft_strlen(str) + 1;
+	s = (char *)malloc(sizeof(char) * len);
+	if (s == NULL)
+		return (NULL);
+	i = -1;
+	while (++i < len)
+		s[i] = str[i];
+	return (s);
 }
