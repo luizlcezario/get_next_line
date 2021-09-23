@@ -39,43 +39,37 @@
 
 # :sparkles: What's Get Next Line of 42?
 
-This is a fucntion to get next line of the of a text using a Buffer.
+This is a fucntion to get next line of the text in a archive or other places thats generate a filedescription like the standard input and output.
 
 
-## :clipboard: List of Archives
-<h3>
-Part 1
+# :clipboard: List of Archives
+<h3 align=center>
+Standard
 </h3>
 
-<i>In this first part, you must re-code a set of the libc functions, as defined in their man. Your functions will need to present the same prototype and behaviors as the originals. Your functions’ names must be prefixed by “ft_”. For instance strlen becomes ft_strlen.</i>
+<i>In this files, you will find GNL using standard lists and recursive function that's using strjoin and other function from Libft, and made like others did.</i>
 
-<p align=center>
-• get_next_line
-• get_next_line_utils
-• get_next_line
-</p>
 
 <h3 align=center>
-Bonus
+Linked List
 </h3>
 
-<i>In this second part, you must code a set of functions that are either not included in the libc, or included in a different form. Some of these functions can be useful to write Part 1’s functions.</i>
+<i>In this files, you will find GNL using linked list thats is a recourse that's more efficient that the standard list from c, we learn about it in the bonus of the Libft, and this is probably more efficient that other's because of that.</i>
 
-<p align=center>
-• substr
-</p>
 
 ---
 
-<h2>
-The project
-</h2>
+### Functions from `Standard`
 
-### Functions from `<ctype.h>`
+- [`get_next_line`](GNL/get_next_line.c)	- all non-libft functions that's necessary to run the GNL
+- [`get_next_line_utils`](GNL/get_next_line_utils.c)	- all functions from libft that's necessary to run the GNL
+- [`get_next_line header`](GNL/get_next_line.h)		- the header of the GNL
 
-- [`get_next_line`](get_next_line.c)	- checks for an alphabetic character.
-- [`get_next_line_utils`](get_next_line_utils.c)	- checks for a digit (0 through 9).
-- [`get_next_line header`](get_next_line.h)		- checks for an alphanumeric character.
+### Functions from `Linked List`
+
+- [`get_next_line`](GNLinked/get_next_line.c)	- all non-libft functions that's necessary to run the GNL
+- [`get_next_line_utils`](GNLinked/get_next_line_utils.c)	- all functions from libft that's necessary to run the GNL
+- [`get_next_line header`](GNLinked/get_next_line.h)		- the header of the GNL
 
 # :computer: Technologies
 
@@ -89,28 +83,29 @@ This Project was made with:
 # :construction_worker: How to Run
 ```bash
 # If you want a Script for testing use this :
-# https://github.com/luizlcezario/Libft_Test.git
+# https://github.com/Tripouille/gnlTester
+
+# or use the example_main.c in the main folder and make you the test.
 
 # Clone the Repo
-$ git clone https://github.com/luizlcezario/Libft_Test.git
+$ git clone https://github.com/luizlcezario/get_next_line.git
 
 # Enter in the Folder
-$ cd Libft
+$ cd get_next_line
 
 # *************COMMANDS************ #
-# run - run compile all the libtest with the your libft and run the all tests
-$ make all
-# clean - remove the .o and .c files 
-$ make clean
-# fclean - remove the .o and .c files and the .a
-$ make fclean
-# re - remove all files and remake all
-$ make re
+# what of the to GNLs you want to test entry in the folder
+$ cd GNL or cd GNLinked
 
-# after run one time the the comand all 
-# you can use compile others files .c using this lib 
-# and using the function of then.
-$ gcc main.c -L . -lft
+
+# for test with the example_main.c you need to copy the example_main.c 
+#folder the folder and than rename to main.c and run the comamand below.
+
+# then run this command to generate the exe of
+$ make all
+
+# run the test with the main example
+$ ./get_next_line
 
 ```
 
