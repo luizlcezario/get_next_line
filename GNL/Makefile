@@ -13,7 +13,7 @@
 #valgrind --tool=memcheck --leak-check=yes --show-reachable=yes --num-callers=20 --track-fds=yes ./get_next_line 
 CC = gcc
 
-SRCS = main.c get_next_line.c get_next_line_utils.c
+SRCS = example_main.c get_next_line.c get_next_line_utils.c
 
 CFLAGS = -D BUFFER_SIZE=1 
 

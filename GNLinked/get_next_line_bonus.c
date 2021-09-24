@@ -6,11 +6,11 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/23 16:52:29 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/23 20:41:33 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 static char	*concat_all(size_t end, int len, t_list **buffer_lists);
 static char	*read_text(t_list **buffer_lists, t_list *last, int len, int fd);
