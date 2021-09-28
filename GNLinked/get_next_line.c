@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:44 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/23 16:50:06 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/25 14:22:54 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*read_text(t_list **buffer_lists, t_list *last, int len, int fd)
 		len += bytes_read;
 	content[bytes_read] = 0;
 	end = ft_lstnew(content);
-	ft_lstadd_back(&buffer_lists[0], end);
+	last->next = end;
 	return (read_text(&buffer_lists[0], end, len, fd));
 }
 

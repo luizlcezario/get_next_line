@@ -6,7 +6,7 @@
 /*   By: llima-ce <llima-ce@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 17:16:50 by llima-ce          #+#    #+#             */
-/*   Updated: 2021/09/23 02:35:54 by llima-ce         ###   ########.fr       */
+/*   Updated: 2021/09/25 14:31:48 by llima-ce         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,23 +36,6 @@ t_list	*ft_lstnew(void *content)
 	new->content = content;
 	new->next = (NULL);
 	return (new);
-}
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	t_list	*tmp;
-
-	if (new == NULL)
-		return ;
-	if (lst[0] == NULL)
-		lst[0] = new;
-	else
-	{
-		tmp = lst[0];
-		while (tmp->next != NULL)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
 }
 
 size_t	ft_strlen(const char *str)
