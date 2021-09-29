@@ -54,7 +54,7 @@ Standard
 Linked List
 </h3>
 
-<i>In this files, you will find GNL using linked list thats is a recourse that's more efficient that the standard list from c, we learn about it in the bonus of the Libft, and this is probably more efficient that other's because of that.</i>
+<i>In this files, you will find GNL using linked list that's is a resource that's more efficient that the standard list from C, we learn about it in the bonus of the Libft, and this is probably more efficient that other's because of that.</i>
 
 
 ---
@@ -112,7 +112,7 @@ $ ./get_next_line
 
 # :bug: Issues?
 
-Please feel free **to create a new issue** with its title and description on the issues page of the [Libft](https://github.com/luizlcezario/Libft/issues) Repository. If you have already found the solution to the problem, **I would love to review your pull request**!
+Please feel free **to create a new issue** with its title and description on the issues page of the [Get_Next_Line](https://github.com/luizlcezario/Libft/issues) Repository. If you have already found the solution to the problem, **I would love to review your pull request**!
 
 
 Give ⭐️ if you like this project, this will help me!
